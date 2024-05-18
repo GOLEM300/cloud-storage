@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "fd06e70a-9282-42b6-8e20-c8b91081a952",
+		"name": "CloudStorage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13254881"
+	},
+	"item": [
+		{
+			"name": "user register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "yourmail@pochta.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "12345678",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "user login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 5|53Kx9EOc2jJyDV94WHyrdSre5qPmZXQvxNXb2rMf381003b9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "folder_name",
+							"value": "new_folder",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/storage/store"
+			},
+			"response": []
+		},
+		{
+			"name": "folder store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "folder_name",
+							"value": "new_folder",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/storage/store"
+			},
+			"response": []
+		},
+		{
+			"name": "folder update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "folder_name",
+							"value": "new_fol",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/storage/update/4"
+			},
+			"response": []
+		},
+		{
+			"name": "folder delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost/api/v1/storage/4"
+			},
+			"response": []
+		},
+		{
+			"name": "disk memory usage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/api/v1/storage/size"
+			},
+			"response": []
+		},
+		{
+			"name": "files upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files[]",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "files[]",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "folder_name",
+							"value": "new_folder",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/upload/store"
+			},
+			"response": []
+		},
+		{
+			"name": "file update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "new_name",
+							"type": "text"
+						},
+						{
+							"key": "folder_name",
+							"value": "new_folder",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/upload/update/7"
+			},
+			"response": []
+		},
+		{
+			"name": "file show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/api/v1/upload/show/7"
+			},
+			"response": []
+		},
+		{
+			"name": "file download",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/api/v1/upload/download/7"
+			},
+			"response": []
+		},
+		{
+			"name": "file visibly",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "visibly",
+							"value": "private",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost/api/v1/upload/visibly/7"
+			},
+			"response": []
+		},
+		{
+			"name": "file delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost/api/v1/upload/7"
+			},
+			"response": []
+		},
+		{
+			"name": "user logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost/api/v1/auth/logout"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
