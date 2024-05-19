@@ -26,9 +26,7 @@ class UploadController extends Controller
         try {
             $files = $request->allFiles()['files'];
 
-            //Здесь все это можно вынести в фон, подключив rabbitmq или redis
-            //Но в тз было написано запускать все одной командой
-            //А для запуска воркера нужна еще одна
+            //Подключать job не имеет смысла, так как файл все равно напрямую передать туда нельзя
             foreach ($files as $key => $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_size = $file->getSize();
