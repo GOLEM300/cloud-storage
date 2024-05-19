@@ -25,13 +25,15 @@ class UploadController extends Controller
     {
         try {
             $files = $request->allFiles()['files'];
+            $folder_name = $request->folder_name;
+            $user_id = $request->user()->id;
 
             //Подключать job не имеет смысла, так как файл все равно напрямую передать туда нельзя
             foreach ($files as $key => $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_size = $file->getSize();
-                $file_path = $request->folder_name;
-                $folder_id = Folder::select('id')->where('folder_name',$request->folder_name)->get()[0]->id;
+                $file_path = $folder_name;
+                $folder_id = Folder::select('id')->where('folder_name',$folder_name)->get()[0]->id;
 
                 Storage::disk('public')->putFileAs($file_path, $file, $file_name);
 
@@ -39,7 +41,7 @@ class UploadController extends Controller
                 $uploaded_file[$key]['size'] = $file_size;
                 $uploaded_file[$key]['path'] = $file_path;
                 $uploaded_file[$key]['upload_time'] = date('Y-m-d H:i:s');
-                $uploaded_file[$key]['user_id'] = $request->user()->id;
+                $uploaded_file[$key]['user_id'] = $user_id;
                 $uploaded_file[$key]['folder_id'] = $folder_id;
             }
 
