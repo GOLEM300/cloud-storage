@@ -19,21 +19,22 @@ class UploadController extends Controller
 {
     /**
      * @param UploadedFileStoreRequest $request
+     * @param Folder $folder
      * @return ResponseFactory|Response
      */
-    public function store(UploadedFileStoreRequest $request): ResponseFactory|Response
+    public function store(UploadedFileStoreRequest $request, Folder $folder): ResponseFactory|Response
     {
         try {
             $files = $request->allFiles()['files'];
-            $folder_name = $request->folder_name;
             $user_id = $request->user()->id;
+            $uploaded_file = [];
 
             //Подключать job не имеет смысла, так как файл все равно напрямую передать туда нельзя
             foreach ($files as $key => $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_size = $file->getSize();
-                $file_path = $folder_name;
-                $folder_id = Folder::select('id')->where('folder_name',$folder_name)->get()[0]->id;
+                $file_path = $folder->folder_name;
+                $folder_id = $folder->id;
 
                 Storage::disk('public')->putFileAs($file_path, $file, $file_name);
 
@@ -50,7 +51,7 @@ class UploadController extends Controller
             return response(['message' => 'Файлы успешно сохранены'], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
-            return response(['message' => 'Что то пошло не так'], 500);
+            return response(['message' => 'Что то пошло не так'], 422);
         }
     }
 
@@ -119,7 +120,7 @@ class UploadController extends Controller
             ], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
-            return response(['message' => 'Файла не существует'], 500);
+            return response(['message' => 'Файла не существует'], 404);
         }
     }
 

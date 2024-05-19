@@ -45,7 +45,7 @@ Route::group([
         Route::group([
             'middleware' => 'auth:sanctum'
         ], function () {
-            Route::post('/store', 'UploadController@store')->name('upload.store');
+            Route::post('/store/{folder}', 'UploadController@store')->name('upload.store');
             Route::post('/update/{uploaded_file}', 'UploadController@update')->name('upload.update');
             Route::delete('/{uploaded_file}', 'UploadController@delete')->name('upload.destroy');
             Route::post('/visibly/{uploaded_file}', 'UploadController@visibly')->name('upload.visibly');

@@ -25,7 +25,6 @@ class UploadedFileStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'folder_name' => ['required', 'string', new StorageDirNotExist()],
             'files' => ['required'],
             'files.*' => ['file']
         ];
@@ -39,8 +38,6 @@ class UploadedFileStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'folder_name.required' => 'Поле folder_name обязательно',
-            'folder_name.string' => 'Имя папки должно быть строкой',
             'files.required' => 'Поле files обязательно',
             'files.*.file' => 'Неверный тип поля file'
         ];
