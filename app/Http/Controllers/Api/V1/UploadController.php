@@ -51,6 +51,7 @@ class UploadController extends Controller
             return response(['message' => 'Файлы успешно сохранены'], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
+
             return response(['message' => 'Что то пошло не так'], 422);
         }
     }
@@ -66,10 +67,13 @@ class UploadController extends Controller
         }
         try {
             Storage::disk('public')->delete($uploaded_file->path . '/' . $uploaded_file->name);
+
             $uploaded_file->delete();
+
             return response(['message' => 'Файл удален'], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
+
             return response(['message' => 'Что то пошло не так'], 500);
         }
     }
@@ -90,11 +94,13 @@ class UploadController extends Controller
             Storage::disk('public')->move($uploaded_file->path . '/' . $uploaded_file->name, $uploaded_file->path . '/' . $new_file_name);
 
             $uploaded_file->name = $new_file_name;
+
             $uploaded_file->save();
 
             return response(['message' => 'Файл переименован'], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
+
             return response(['message' => 'Что то пошло не так'], 500);
         }
     }
@@ -137,6 +143,7 @@ class UploadController extends Controller
             return response()->download(Storage::disk('public')->path($uploaded_file->path . '/' . $uploaded_file->name));
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
+
             return response(['message' => 'Что то пошло не так'], 500);
         }
     }
@@ -153,11 +160,15 @@ class UploadController extends Controller
         }
         try {
             Storage::disk('public')->setVisibility($uploaded_file->path . '/' . $uploaded_file->name, $request->visibly);
+
             $uploaded_file->visibly = $request->visibly === 'public' ? 1 : 0;
+
             $uploaded_file->save();
+
             return response(['message' => 'Видимость файла изменена'], 200);
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
+
             return response(['message' => 'Что то пошло не так'], 500);
         }
     }
