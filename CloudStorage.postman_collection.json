@@ -67,7 +67,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"value": "Bearer 7|10pFGyDSsSFedbV0wlB0B1vmelHA6n9sPidVRIAO51fa3b11",
 						"type": "text"
 					}
 				],
@@ -92,7 +92,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"value": "Bearer 7|10pFGyDSsSFedbV0wlB0B1vmelHA6n9sPidVRIAO51fa3b11",
 						"type": "text"
 					}
 				],
@@ -106,7 +106,7 @@
 						}
 					]
 				},
-				"url": "http://localhost/api/v1/storage/update/4"
+				"url": "http://localhost/api/v1/storage/update/{folder_id}"
 			},
 			"response": []
 		},
@@ -121,7 +121,7 @@
 						"type": "text"
 					}
 				],
-				"url": "http://localhost/api/v1/storage/4"
+				"url": "http://localhost/api/v1/storage/{folder_id}"
 			},
 			"response": []
 		},
@@ -141,7 +141,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 6|HaRLVF0S1ZsXCJIu1G9o58fW8z7tfySTWMQbFVFXc9a3a2a2",
+						"value": "Bearer 2|GTlRylBXLOLO30ULp6CYzjInKtmmQeIvMECjvTYz28fcfb54",
 						"type": "text"
 					}
 				],
@@ -151,21 +151,16 @@
 						{
 							"key": "files[]",
 							"type": "file",
-							"src": []
+							"src": "/home/golem/Загрузки/Образец для сверки.xlsx"
 						},
 						{
 							"key": "files[]",
 							"type": "file",
-							"src": []
-						},
-						{
-							"key": "folder_name",
-							"value": "new_folder",
-							"type": "text"
+							"src": "/home/golem/Загрузки/упрощение лк wb_stat"
 						}
 					]
 				},
-				"url": "http://localhost/api/v1/upload/store"
+				"url": "http://localhost/api/v1/upload/store/{folder_id}"
 			},
 			"response": []
 		},
@@ -195,7 +190,7 @@
 						}
 					]
 				},
-				"url": "http://localhost/api/v1/upload/update/7"
+				"url": "http://localhost/api/v1/upload/update/{uploaded_file_id}"
 			},
 			"response": []
 		},
@@ -204,7 +199,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost/api/v1/upload/show/7"
+				"url": "http://localhost/api/v1/upload/show/{uploaded_file_id}"
 			},
 			"response": []
 		},
@@ -213,7 +208,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost/api/v1/upload/download/7"
+				"url": "http://localhost/api/v1/upload/download/{uploaded_file_id}"
 			},
 			"response": []
 		},
@@ -238,7 +233,7 @@
 						}
 					]
 				},
-				"url": "http://localhost/api/v1/upload/visibly/7"
+				"url": "http://localhost/api/v1/upload/visibly/{uploaded_file_id}"
 			},
 			"response": []
 		},
@@ -253,7 +248,7 @@
 						"type": "text"
 					}
 				],
-				"url": "http://localhost/api/v1/upload/7"
+				"url": "http://localhost/api/v1/upload/{uploaded_file_id}"
 			},
 			"response": []
 		},
