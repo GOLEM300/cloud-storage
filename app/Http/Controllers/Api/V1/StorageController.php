@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Illuminate\Support\Str;
 
 class StorageController extends Controller
 {
@@ -21,13 +22,19 @@ class StorageController extends Controller
     public function store(FolderCreateRequest $request): ResponseFactory|Response
     {
         try {
-            $folder_name = $request->folder_name;
+            $path = $request->path;
+
+            $folder_name = Str::afterLast($path,'/');
 
             $user_id = $request->user()->id;
 
-            Storage::disk('public')->makeDirectory($folder_name);
+            Storage::disk('public')->makeDirectory($path);
 
-            Folder::create(['folder_name' => $folder_name, 'user_id' => $user_id]);
+            Folder::create([
+                'folder_name' => $folder_name,
+                'user_id' => $user_id,
+                'path' => $path
+            ]);
 
             return response(['message' => 'Папка создана'], 200);
         } catch (\Throwable $exception) {
@@ -44,11 +51,16 @@ class StorageController extends Controller
     public function update(FolderPatchRequest $request, Folder $folder): ResponseFactory|Response
     {
         try {
-            $folder_name = $request->folder_name;
+            $path = $request->path;
 
-            Storage::disk('public')->move($folder->folder_name, $folder_name);
+            $folder_name = Str::afterLast($request->path,'/');
 
-            $folder->where('user_id', $request->user()->id)->update(['folder_name' => $folder_name]);
+            Storage::disk('public')->move($folder->path, $path);
+
+            $folder->where('id', $folder->id)->update([
+                'folder_name' => $folder_name,
+                'path' => Storage::disk('public')->path($path)
+            ]);
 
             return response(['message' => 'Папка переименована'], 200);
         } catch (\Throwable $exception) {
@@ -65,13 +77,7 @@ class StorageController extends Controller
     public function delete(Folder $folder): ResponseFactory|Response
     {
         try {
-            $folder_name = $folder->folder_name;
-
-            if (!Storage::disk('public')->directoryExists($folder_name)) {
-                return response(['message' => 'Папки с таким именем не существует'], 400);
-            }
-
-            Storage::disk('public')->deleteDirectory($folder_name);
+            Storage::disk('public')->deleteDirectory($folder->path);
 
             $folder->delete();
 

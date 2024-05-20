@@ -47,7 +47,7 @@ class UploadTest extends TestCase
 
         $folder = Folder::factory()->create(['user_id' => $user->id]);
 
-        Storage::disk('public')->makeDirectory($folder->folder_name);
+        Storage::disk('public')->makeDirectory($folder->path);
 
         $file_1 = iuf::fake()->create('file_1.txt', 100);
 

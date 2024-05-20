@@ -22,17 +22,20 @@ class StorageTest extends TestCase
 
         $user = User::factory()->create();
 
+        $path = 'test_folder';
+
         $folder_name = 'test_folder';
 
-        $response = $this->actingAs($user)->postJson('/api/v1/storage/store', ['folder_name' => $folder_name]);
+        $response = $this->actingAs($user)->postJson('/api/v1/storage/store', ['path' => $path]);
 
         $response->assertStatus(200)->assertJson(['message' => 'Папка создана']);
 
-        $this->assertTrue(Storage::disk('public')->exists($folder_name));
+        $this->assertTrue(Storage::disk('public')->exists($path));
 
         $this->assertDatabaseHas('folders', [
             'folder_name' => $folder_name,
             'user_id' => $user->id,
+            'path' => $path
         ]);
     }
 
@@ -48,20 +51,23 @@ class StorageTest extends TestCase
 
         $folder = Folder::factory()->create(['user_id' => $user->id]);
 
-        Storage::disk('public')->makeDirectory($folder->folder_name);
+        Storage::disk('public')->makeDirectory($folder->path);
+
+        $path = 'new_folder_name';
 
         $new_folder_name = 'new_folder_name';
 
-        $response = $this->actingAs($user)->postJson("/api/v1/storage/update/{$folder->id}", ['folder_name' => $new_folder_name]);
+        $response = $this->actingAs($user)->postJson("/api/v1/storage/update/{$folder->id}", ['path' => $path]);
 
         $response->assertStatus(200)->assertJson(['message' => 'Папка переименована']);
 
-        $this->assertTrue(Storage::disk('public')->exists($new_folder_name));
+        $this->assertTrue(Storage::disk('public')->exists($path));
 
         $this->assertDatabaseHas('folders', [
             'id' => $folder->id,
             'folder_name' => $new_folder_name,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'path' => Storage::disk('public')->path($path)
         ]);
     }
 
@@ -83,7 +89,7 @@ class StorageTest extends TestCase
 
         $response->assertStatus(200)->assertJson(['message' => 'Папка удалена']);
 
-        $this->assertFalse(Storage::disk('public')->exists($folder->folder_name));
+        $this->assertFalse(Storage::disk('public')->exists($folder->path));
 
         $this->assertDatabaseMissing('folders', ['id' => $folder->id]);
     }

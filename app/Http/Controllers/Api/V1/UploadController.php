@@ -33,7 +33,7 @@ class UploadController extends Controller
             foreach ($files as $key => $file) {
                 $file_name = $file->getClientOriginalName();
                 $file_size = $file->getSize();
-                $file_path = $folder->folder_name;
+                $file_path = $folder->path;
                 $folder_id = $folder->id;
 
                 Storage::disk('public')->putFileAs($file_path, $file, $file_name);

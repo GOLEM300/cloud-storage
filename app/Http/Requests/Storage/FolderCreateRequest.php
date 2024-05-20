@@ -25,7 +25,7 @@ class FolderCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'folder_name' => ['required', 'string', new StorageDirExist()]
+            'path' => ['required', 'string', new StorageDirExist()]
         ];
     }
 
