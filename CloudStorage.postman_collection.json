@@ -150,12 +150,12 @@
 						{
 							"key": "files[]",
 							"type": "file",
-							"src": ""
+							"src": "/home/golem/Загрузки/Образец для сверки.xlsx"
 						},
 						{
 							"key": "files[]",
 							"type": "file",
-							"src": ""
+							"src": "/home/golem/Загрузки/упрощение лк wb_stat"
 						}
 					]
 				},
@@ -180,11 +180,6 @@
 						{
 							"key": "name",
 							"value": "new_name",
-							"type": "text"
-						},
-						{
-							"key": "folder_name",
-							"value": "new_folder",
 							"type": "text"
 						}
 					]
