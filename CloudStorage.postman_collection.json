@@ -39,24 +39,23 @@
 			"name": "user login",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "folder_name",
-							"value": "new_folder",
+							"key": "email",
+							"value": "yourmail@pochta.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
 							"type": "text"
 						}
 					]
 				},
-				"url": "http://localhost/api/v1/storage/store"
+				"url": "http://localhost/api/v1/auth/login"
 			},
 			"response": []
 		},
@@ -75,8 +74,8 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "folder_name",
-							"value": "new_folder",
+							"key": "path",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -100,8 +99,8 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "folder_name",
-							"value": "new_fol",
+							"key": "path",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -141,7 +140,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "Bearer 2|GTlRylBXLOLO30ULp6CYzjInKtmmQeIvMECjvTYz28fcfb54",
 						"type": "text"
 					}
 				],
