@@ -57,7 +57,7 @@ class StorageController extends Controller
 
             Storage::disk('public')->move($folder->path, $path);
 
-            $folder->where('id', $folder->id)->update([
+            $folder->update([
                 'folder_name' => $folder_name,
                 'path' => $path
             ]);
