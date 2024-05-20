@@ -59,7 +59,7 @@ class StorageController extends Controller
 
             $folder->where('id', $folder->id)->update([
                 'folder_name' => $folder_name,
-                'path' => Storage::disk('public')->path($path)
+                'path' => $path
             ]);
 
             return response(['message' => 'Папка переименована'], 200);
