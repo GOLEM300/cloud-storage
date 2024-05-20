@@ -67,7 +67,7 @@ class StorageTest extends TestCase
             'id' => $folder->id,
             'folder_name' => $new_folder_name,
             'user_id' => $user->id,
-            'path' => Storage::disk('public')->path($path)
+            'path' => $path
         ]);
     }
 
